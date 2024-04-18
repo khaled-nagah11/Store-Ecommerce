@@ -2,7 +2,9 @@
 @section('title' , 'Categories')
 @section('Breadcrumb')
     @parent
-    <li class="breadcrumb-item active">Categories</li>
+    <li class="breadcrumb-item active">
+        Categories
+    </li>
 @endsection
 
 @section('content')
@@ -26,13 +28,13 @@
             <td></td>
             <td>{{$category->id}}</td>
             <td>{{$category->name}}</td>
-            <td>{{$category->parent}}</td>
+            <td>{{$category->parent_id}}</td>
             <td>{{$category->created_at}}</td>
             <td>
-                <a href="{{route('categories.edit')}}" class="btn btn-sm btn-outline-success">Edit</a>
+                <a href="{{route('categories.edit' ,[$category->id])}}" class="btn btn-sm btn-outline-success">Edit</a>
             </td>
             <td>
-                <form action="{{route('categories.destroy')}}" method="post">
+                <form action="{{route('categories.destroy',[$category->id])}}" method="post">
                     @csrf
                     @method('delete')
                     <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
@@ -47,4 +49,13 @@
         @endforelse
         </tbody>
     </table>
+
+    @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{session('success')}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
 @endsection
