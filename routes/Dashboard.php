@@ -2,7 +2,7 @@
 
 
 use App\Http\Controllers\Dashboard\CategoryController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Dashboard\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,9 +17,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/dashboard', [DashboardController::class ,'index'])
-    ->middleware(['auth', 'verified'])->name('dashboard.index');
+Route::group(['middleware' => ['auth'], 'as'=>'dashboard.' , 'prefix'=>'dashboard' ], function () {
+    // Routes inside the group
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
+    Route::resource('/categories', CategoryController::class);
+});
 
-Route::resource('dashboard/categories',CategoryController::class);
+
+
 
 

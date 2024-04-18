@@ -35,7 +35,7 @@ class CategoryController extends Controller
         $request->merge(["slug"=>Str::slug($request->name)]);
 
         Category::create($request->all());
-        return redirect()->route('categories.index')->with('success' , 'Category Created Successfully!');
+        return redirect()->route('dashboard.categories.index')->with('success' , 'Category Created Successfully!');
 
     }
 
@@ -50,9 +50,11 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $category = Category::findorfail($id);
+        $parents = Category::where("id","<>",$id)->get();
+        return view('dashboard.categories.edit' , compact('category','parents'));
     }
 
     /**
@@ -60,7 +62,9 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $category = Category::findorfail($id);
+        $category->update($request->all());
+        return redirect()->route('dashboard.categories.index')->with('success' , 'Category Updated Successfully!');
     }
 
     /**
