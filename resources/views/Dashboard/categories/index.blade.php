@@ -9,17 +9,18 @@
 
 @section('content')
     <div class="mb-4 text-center">
-        <a href="{{route('dashboard.categories.create')}}" class="btn btn-dark">Create Newe Category</a>
+        <a href="{{route('dashboard.categories.create')}}" class="btn btn-dark">Create New Category</a>
     </div>
     <br>
     <div class="card">
-    <table class="table">
+    <table class="table table-hover">
         <thead style="background-color: rgba(211, 211, 211, 0.5);">
         <tr>
             <th></th>
             <th>ID</th>
             <th>Name</th>
             <th>Parent</th>
+            <th>Image</th>
             <th>Created At</th>
             <th colspan="2">Actions</th>
         </tr>
@@ -31,6 +32,7 @@
             <td>{{$category->id}}</td>
             <td>{{$category->name}}</td>
             <td>{{$category->parent_id}}</td>
+            <td><img src="{{asset('storage/' . $category->image)}}" alt="cat_img" height="50"></td>
             <td>{{$category->created_at}}</td>
             <td>
                 <a href="{{route('dashboard.categories.edit' ,[$category->id])}}" class="btn btn-sm btn-outline-success">Edit</a>
