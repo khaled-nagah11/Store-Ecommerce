@@ -38,9 +38,9 @@ class CategoryController extends Controller
         $request->validate([
             'name'=>'required|string|min:3|max:255',
             'parent_id'=>'nullable|int|exists:categories,id',
-            'description'=>'nullable|min:15',
-            'image'=>'image|max:1048576|dimensions:min_width=100,min_height=100',
-            'status'=>'in:active,archived',
+//            'description'=>'nullable|min:15',
+//            'image'=>'image|max:1048576|dimensions:min_width=100,min_height=100',
+//            'status'=>'in:active,archived',
         ]);
 
         $request->merge(["slug"=>Str::slug($request->name)]);
@@ -83,10 +83,13 @@ class CategoryController extends Controller
         $category = Category::findorfail($id);
         $old_image = $category->image;
         $data = $request->except('image');
-        $data['image'] = $this->uploadImage($request);
-
+        $new_image = $this->uploadImage($request);
+        if ($new_image)
+        {
+            $data['image'] = $new_image;
+        }
         $category->update($data);
-        if ($old_image && $data['image'])
+        if ($old_image && $new_image)
         {
             Storage::disk('public')->delete($old_image);
         }
