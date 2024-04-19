@@ -45,7 +45,7 @@
 
         </tr>
         @empty
-            <tr>
+            <tr style="text-align: center">
                 <td colspan="7" class="text-danger" >No Categories Defined!</td>
             </tr>
         @endforelse

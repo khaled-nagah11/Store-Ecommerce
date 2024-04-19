@@ -53,7 +53,12 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::findorfail($id);
-        $parents = Category::where("id","<>",$id)->get();
+        $parents = Category::where("id","<>",$id)
+            ->where(function ($query) use($id){
+               $query->whereNull('parent_id')
+                     ->orWhere('parent_id' ,'<>',$id);
+            })
+            ->get();
         return view('dashboard.categories.edit' , compact('category','parents'));
     }
 
