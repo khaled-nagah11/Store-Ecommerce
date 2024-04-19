@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-    <div class="card card-primary">
+    <div class="card card-dark">
         <!-- /.card-header -->
         <div class="card-header">
             <h3 class="card-title">Create Category</h3>
@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-primary px-5 py-2"> Save </button>
+                <button type="submit" class="btn btn-dark px-5 py-2"> Save </button>
             </div>
         </form>
     </div>

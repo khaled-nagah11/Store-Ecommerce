@@ -9,8 +9,9 @@
 
 @section('content')
     <div class="mb-4 text-center">
-        <a href="{{route('dashboard.categories.create')}}" class="btn btn-success">Create Category</a>
+        <a href="{{route('dashboard.categories.create')}}" class="btn btn-dark">Create Newe Category</a>
     </div>
+    <br>
     <div class="card">
     <table class="table">
         <thead style="background-color: rgba(211, 211, 211, 0.5);">
