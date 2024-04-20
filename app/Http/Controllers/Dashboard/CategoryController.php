@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -32,16 +33,8 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-
-        $request->validate([
-            'name'=>'required|string|min:3|max:255',
-            'parent_id'=>'nullable|int|exists:categories,id',
-//            'description'=>'nullable|min:15',
-//            'image'=>'image|max:1048576|dimensions:min_width=100,min_height=100',
-//            'status'=>'in:active,archived',
-        ]);
 
         $request->merge(["slug"=>Str::slug($request->name)]);
 

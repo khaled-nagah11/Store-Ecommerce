@@ -13,18 +13,28 @@
     <div class="form-group row">
         <label for="category-parent" class="col-sm-2 col-form-label">Category Parent</label>
         <div class="col-sm-10">
-            <select name="parent_id" class="form-control select2 select2-hidden-accessible" id="category-parent">
+            <select name="parent_id" class="form-control select2 select2-hidden-accessible @error('parent_id') is-invalid @enderror" id="category-parent">
                 <option value="" style="padding:6px 12px;">Main Category</option>
                 @foreach($parents as $parent)
                     <option value="{{$parent->id}}" @selected(old('parent_id',$category->parent_id ) == $parent->id)>{{$parent->name}}</option>
                 @endforeach
             </select>
+            @error('parent_id')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
+            @enderror
         </div>
     </div>
     <div class="form-group row">
         <label for="category-desc" class="col-sm-2 col-form-label">Category Description</label>
         <div class="col-sm-10">
-            <textarea type="text" class="form-control" name="description"  id="category-desc" placeholder="description...">{{old('description',$category->description)}}</textarea>
+            <textarea type="text" class="form-control @error('description') is-invalid @enderror" name="description"  id="category-desc" placeholder="description...">{{old('description',$category->description)}}</textarea>
+            @error('description')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
+            @enderror
         </div>
     </div>
     <div class="form-group row">
